@@ -1,11 +1,13 @@
 from urllib import request
 from django.shortcuts import render
+from django.http import HttpResponse
 from rest_framework import generics, permissions, mixins, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.views import exception_handler
 from .models import Post, Vote
 from .serializers import PostSerializer, VoteSerializer
+from . import urls
 
 # Create your views here.
 
@@ -67,3 +69,5 @@ class VoteCreate(generics.CreateAPIView, mixins.DestroyModelMixin):
             raise ValidationError('You have not voted on this post.. You can only delete your vote')
 
 
+def index(request):
+    return HttpResponse(" Welcome to the Reddit API Clone")
