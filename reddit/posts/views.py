@@ -30,7 +30,6 @@ class PostRetrieveDestroy(generics.RetrieveDestroyAPIView):
             return self.destroy(request, *args, **kwargs)
         else:
             raise ValidationError('You cant delete this post')
-        
 
 class PostRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()   
