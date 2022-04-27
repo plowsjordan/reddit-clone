@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Post
+from .models import Post, Vote
 
 class PostSerializer(serializers.ModelSerializer):
     poster = serializers.ReadOnlyField(source='poster.username')
@@ -11,9 +11,8 @@ class PostSerializer(serializers.ModelSerializer):
 
  
 class VoteSerializer(serializers.ModelSerializer):
-    
     class Meta:
-        model = Post
+        model = Vote
         fields = ['id']
 
  
