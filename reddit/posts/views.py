@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from .models import Post
-from .serializers import PostSerializer
+from .models import Post, Vote
+from .serializers import PostSerializer, VoteSerializer
 
 # Create your views here.
 
@@ -22,3 +22,11 @@ class PostList(generics.ListCreateAPIView):
         pass
 
         
+class VoteCreate(generics.CreateAPIView):
+    serializer_class = VoteSerializer
+    permissions_classes = (permissions.IsAuthenticated)
+
+    def get_queryset(self):
+        user = self.request.username 
+        post = Post.objects.get(pk=self.kwargs['pk'])
+        return Vote.objects.filter(voter=user, post=post)
